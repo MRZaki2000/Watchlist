@@ -222,5 +222,8 @@ form {
     .container {
         max-width: 900px;   
     }
+    .header {
+        padding: 6.25em 2em;
+    }
 }
     
