@@ -8,8 +8,8 @@ html, body {
 
 .container {
     border-radius: 8px;
-    max-width: 700px;
-    /* min-width: 200px; */
+    width: 100%;
+    min-width: 200px;
     height: 100vh;
     margin: 0 auto;
 }
@@ -217,3 +217,10 @@ form {
 .add-some-movies-btn {
     background-image: url("images/plus2.png");
 }
+
+@media (min-width:700px) {
+    .container {
+        max-width: 900px;   
+    }
+}
+    
