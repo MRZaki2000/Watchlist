@@ -24,11 +24,16 @@ document.addEventListener('click', function(e){
 })
 
 function handleAddBtn(movieId) {
-    const movieObj = moviesArray.filter(function(movie){
+    const watchlistText = document.getElementById(movieId)
+    const watchlistBtn = document.getElementById(movieId+"s")
+    
+    movieObj = moviesArray.filter(function(movie){
         return movieId === movie.imdbID
     })[0]
-    watchListArray.push(movieObj)
-    localStorage.setItem("Watchlist", JSON.stringify(watchListArray))
+    if(!watchListArray.find(obj => obj.imdbID === movieObj.imdbID)){
+        watchListArray.push(movieObj)
+        localStorage.setItem("Watchlist", JSON.stringify(watchListArray))        
+    }
 }
 
 // ////////////////////////////////////////////////////////////////////
