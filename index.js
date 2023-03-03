@@ -1,10 +1,12 @@
-// javascript
 // 3422ea5c
 const searchInput = document.getElementById("search-input")
 const form = document.getElementById("form")
 const movieList = document.getElementById("movie-list")
+
 let moviesArray = []
 let watchListArray = []
+let movieObj = {}
+
 const moviesFromLocalStorage = JSON.parse(localStorage.getItem("Watchlist"))
 const searchedMoviesFromSessionStorage = JSON.parse(sessionStorage.getItem("SearchedMovies"))
 
@@ -47,7 +49,6 @@ form.addEventListener("submit", function(e) {
 
 function getEeachMovie(movies) {
     movieList.innerHTML = ""
-    
     if(movies){    
         movies.forEach(function(movie) {
         fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=8eeeb0ec`)
@@ -67,9 +68,8 @@ function getEeachMovie(movies) {
 function renderMovies() {
     movieList.classList.remove("movie-list")
     movieList.classList.add("movie-flex")
-    
     let html = ""
-    moviesArray.forEach(function(movie){
+    moviesArray.forEach(function(movie){        
         html += `
         <div class="movie-specs">
 
@@ -88,8 +88,8 @@ function renderMovies() {
                     <p>${movie.Runtime}</p>
                     <p>${movie.Genre}</p>
                     <div class="watchlist-items">
-                        <button class="watchlist-btn" data-add="${movie.imdbID}"></button>
-                        <p class="watchlist-text">watchlist</p>
+                        <button id="${movie.imdbID+"s"}" class="watchlist-btn" data-add="${movie.imdbID}"></button>
+                        <p id="${movie.imdbID}" class="watchlist-text">watchlist</p>
                     </div>
                 </div>
             
@@ -97,13 +97,12 @@ function renderMovies() {
                     <p>${movie.Plot}</p>
                 </div>
             </div>
-        </div>`
+        </div>`  
     })
-   movieList.innerHTML = html
+    movieList.innerHTML = html
 }
 
 function renderNotFound() {
-        movieList.classList.remove("movie-flex")
         movieList.classList.add("movie-list")
         movieList.innerHTML = `
             <h3 class ="not-found">Unable to find what you’re looking for. Please try another search.</h3>
